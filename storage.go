@@ -1,43 +1,44 @@
 package catacomb
 
-const CloudStorageProvider (
-	AWS_S3 iota
-	AZURE_STORAGE
-	DO_VOLUMES
-	LINODE_STORAGE
+type CloudStorageProvider int
+
+const (
+	AWS_S3         CloudStorageProvider = 0
+	AZURE_STORAGE                       = 1
+	DO_VOLUMES                          = 2
+	LINODE_STORAGE                      = 3
 )
 
 type CatacombStorage struct {
-	provider string
+	provider  string
 	accountid string
-	password string
-	address string
+	password  string
+	address   string
 }
 
-/*
 type CatacombStorageConfig struct {
-	provider int
+	provider  CloudStorageProvider
 	accountid string
-	password string
-	address string
+	password  string
+	address   string
 }
-*/
 
 func init_storage() *CatacombStorage {
 	/*
-	switch config.provider {
-	case AWS_S3:
-		fmt.Printf("Unsupported")
-	case AZURE_STORAGE:
-		fmt.Printf("Unsupported")
-	case DO_VOLUMES:
-		fmt.Printf("Unsupported")
-	case LINODE_STORAGE:
-		fmt.Printf("Unsupported")
-	default:
-		fmt.Printf("Unsupported")
-	}
+		switch config.provider {
+		case AWS_S3:
+			fmt.Printf("Unsupported")
+		case AZURE_STORAGE:
+			fmt.Printf("Unsupported")
+		case DO_VOLUMES:
+			fmt.Printf("Unsupported")
+		case LINODE_STORAGE:
+			fmt.Printf("Unsupported")
+		default:
+			fmt.Printf("Unsupported")
+		}
 	*/
+	return nil
 }
 
 func storageObjectUpload() {
@@ -57,7 +58,6 @@ func storageObjectDelete() {
 
 	}
 }
-
 
 /*
 func verify_storage_config() {
