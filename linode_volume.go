@@ -1,0 +1,8 @@
+
+func linodeVolumeObjectUpload() {
+
+}
+
+func linodeVolumeObjectDownload() {
+
+}
