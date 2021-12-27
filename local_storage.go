@@ -1,10 +1,11 @@
+package catacomb
 
 func localVolumeObjectUpload() {
 
 }
 
 func localVolumeObjectDownload() {
-	// symlink from upload	
+	// symlink from upload
 }
 
 func localVolumeObjectDelete() {

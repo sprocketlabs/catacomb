@@ -1,16 +1,23 @@
+package catacomb
 
+import (
+	"fmt"
+	"os"
+
+	"github.com/aws/aws-sdk-go-v2"
+)
 
 func awsStorageObjectUpload() {
 	sess := session.Must(session.NewSession())
 
 	// Create an uploader with the session and default options
 	uploader := s3manager.NewUploader(sess)
-	
-	f, err  := os.Open(filename)
+
+	f, err := os.Open(filename)
 	if err != nil {
 		return fmt.Errorf("failed to open file %q, %v", filename, err)
 	}
-	
+
 	// Upload the file to S3.
 	result, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(myBucket),
@@ -48,5 +55,5 @@ func awsStorageObjectDownload() {
 }
 
 func awsStorageObjectDelete() {
-	
+
 }

@@ -1,14 +1,14 @@
-
+package catacomb
 
 func storageObjectUpload() {
 	switch {
-		
+
 	}
 }
 
 func storageObjectDownload() {
 	switch {
-		
+
 	}
 }
 
