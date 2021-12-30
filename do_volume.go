@@ -1,12 +1,33 @@
+package catacomb
 
-func doVolumeObjectUpload() {
+type DoStorageConfig struct {
+}
+
+type DoStorageSession struct {
+}
+
+func digitaloceanNewSession(config LinodeVolumeConfig) LinodeVolumeSession {
+
+	session := LinodeVolumeSession{}
+	return session
+}
+
+func (session LinodeVolumeSession) digitaloceanCloseSession() {
 
 }
 
-func doVolumeObjectDownload() {
-	
+func (session DoStorageSession) digitaloceanListObjects() {
+
 }
 
-func doVolumeObjectDelete() {
-	
+func (session DoStorageSession) digitaloceanObjectUpload() {
+
+}
+
+func (session DoStorageSession) digitaloceanObjectDownload() {
+
+}
+
+func (session DoStorageSession) digitaloceanObjectDelete() {
+
 }
