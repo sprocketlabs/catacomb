@@ -6,28 +6,28 @@ type DoStorageConfig struct {
 type DoStorageSession struct {
 }
 
-func digitaloceanNewSession(config LinodeVolumeConfig) LinodeVolumeSession {
+func doVolumeNewSession(config LinodeVolumeConfig) LinodeVolumeSession {
 
 	session := LinodeVolumeSession{}
 	return session
 }
 
-func (session LinodeVolumeSession) digitaloceanCloseSession() {
+func (session LinodeVolumeSession) doVolumeCloseSession() {
 
 }
 
-func (session DoStorageSession) digitaloceanListObjects() {
+func (session DoStorageSession) doVolumeListObjects() {
 
 }
 
-func (session DoStorageSession) digitaloceanObjectUpload() {
+func (session DoStorageSession) doVolumeObjectUpload() {
 
 }
 
-func (session DoStorageSession) digitaloceanObjectDownload() {
+func (session DoStorageSession) doVolumeObjectDownload() {
 
 }
 
-func (session DoStorageSession) digitaloceanObjectDelete() {
+func (session DoStorageSession) doVolumeObjectDelete() {
 
 }

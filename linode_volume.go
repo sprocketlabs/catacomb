@@ -6,13 +6,13 @@ type LinodeVolumeConfig struct {
 type LinodeVolumeSession struct {
 }
 
-func linodeNewSession(config LinodeVolumeConfig) LinodeVolumeSession {
+func linodeVolumeNewSession(config LinodeVolumeConfig) LinodeVolumeSession {
 
 	session := LinodeVolumeSession{}
 	return session
 }
 
-func (session LinodeVolumeSession) linodeCloseSession() {
+func (session LinodeVolumeSession) linodeVolumeCloseSession() {
 
 }
 

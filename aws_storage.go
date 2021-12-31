@@ -3,20 +3,20 @@ package catacomb
 import (
 	"fmt"
 	"os"
-	//"github.com/aws/aws-sdk-go-v2"
+	"github.com/aws/aws-sdk-go-v2"
 )
 
 type AwsS3Config struct {
 }
 
 type AwsS3Session struct {
-	//session
+	session
 }
 
 func (config AwsS3Config) awsNewSession() AwsS3Session {
 
 	session := AwsS3Session{
-		//session.Must(session.NewSession()),
+		session = session.Must(session.NewSession()),
 	}
 
 	return session
