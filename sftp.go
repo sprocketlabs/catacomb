@@ -90,9 +90,6 @@ func (session SftpRemoteSession) sftpListObjects(remoteDir string) (theFiles []F
 }
 
 func (session SftpRemoteSession) sftpUploadObject(localPath string, remotePath string) {
-
-	// create new SFTP client
-
 	// create destination file
 	dstFile, err := session.session.Create("./file.txt")
 	if err != nil {

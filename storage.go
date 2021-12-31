@@ -20,9 +20,15 @@ const (
 	CASCADE_MIRROR_REGIONAL                  = 2
 )
 
-type CatacombStorageConfigs struct {
+type CatacombProvider struct {
+	accountId string
+	password string
 	provider string
-	config   interface{}
+}
+
+type CatacombStorageConfigs struct {
+	credentials string[]
+	providers CatacombProvider[]
 }
 
 type CatacombStorageSessions struct {
