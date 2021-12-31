@@ -1,8 +1,16 @@
 package catacomb
 
 import (
-	//"github.com/sprocketlabs/gocom"
+	"bufio"
+	"fmt"
+	"io"
+	"log"
+	"os"
+	"path/filepath"
+	"strings"
+
 	"github.com/pkg/sftp"
+	"golang.org/x/crypto/ssh"
 )
 
 type SftpRemoteConfig struct {
@@ -14,13 +22,12 @@ type SftpRemoteSession struct {
 	session *sftp.Client
 }
 
-/*
 func sftpNewSession(config SftpRemoteConfig) SftpRemoteSession {
 	user := ""
 	pass := ""
 
 	// get host public key
-	hostKey := nil //getHostKey(config.sftpAddress)
+	hostKey := getHostKey(config.sftpAddress)
 
 	sshClientConfig := &ssh.ClientConfig{
 		User: user,
@@ -54,7 +61,7 @@ func (session SftpRemoteSession) sftpCloseSession() {
 	session.session.Close()
 }
 
-func (session SftpRemoteSession) sftpListObjects(remoteDir string) (theFiles []FileData, err error) {
+func (session SftpRemoteSession) sftpListObjects(remoteDir string) (theFiles []string, err error) {
 
 	files, err := session.session.ReadDir(remoteDir)
 	if err != nil {
@@ -62,23 +69,19 @@ func (session SftpRemoteSession) sftpListObjects(remoteDir string) (theFiles []F
 	}
 
 	for _, f := range files {
-		var name, modTime, size string
+		var name string
 
 		name = f.Name()
-		modTime = f.ModTime().Format("2006-01-02 15:04:05")
-		size = fmt.Sprintf("%12d", f.Size())
+		//modTime = f.ModTime().Format("2006-01-02 15:04:05")
+		//size = fmt.Sprintf("%12d", f.Size())
 
 		if f.IsDir() {
 			name = name + "/"
-			modTime = ""
-			size = "PRE"
+			//modTime = ""
+			//size = "PRE"
 		}
 
-		theFiles = append(theFiles, FileData{
-			Name:    name,
-			Size:    size,
-			ModTime: modTime,
-		})
+		theFiles = append(theFiles, name)
 	}
 
 	return theFiles, nil
@@ -133,4 +136,36 @@ func (session SftpRemoteSession) sftpDownloadObject() {
 		log.Fatal(err)
 	}
 }
-*/
+
+func getHostKey(host string) ssh.PublicKey {
+	// parse OpenSSH known_hosts file
+	// ssh or use ssh-keyscan to get initial key
+	file, err := os.Open(filepath.Join(os.Getenv("HOME"), ".ssh", "known_hosts"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	var hostKey ssh.PublicKey
+	for scanner.Scan() {
+		fields := strings.Split(scanner.Text(), " ")
+		if len(fields) != 3 {
+			continue
+		}
+		if strings.Contains(fields[0], host) {
+			var err error
+			hostKey, _, _, _, err = ssh.ParseAuthorizedKey(scanner.Bytes())
+			if err != nil {
+				log.Fatalf("error parsing %q: %v", fields[2], err)
+			}
+			break
+		}
+	}
+
+	if hostKey == nil {
+		log.Fatalf("no hostkey found for %s", host)
+	}
+
+	return hostKey
+}
