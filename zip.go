@@ -1,44 +1,34 @@
 package catacomb
 
 import (
+	"bytes"
 	"compress/gzip"
-	"fmt"
-	"os"
+	"log"
 )
 
-func compress(data []byte) {
-	original := "bird and frog"
-
-	// Open a file for writing.
-	f, _ := os.Create("C:\\programs\\file.gz")
-
-	// Create gzip writer.
-	w := gzip.NewWriter(f)
-
-	// Write bytes in compressed form to the file.
-	w.Write([]byte(original))
-
-	// Close the file.
-	w.Close()
-
-	fmt.Println("DONE")
+func compress(data []byte) []byte {
+	var b bytes.Buffer
+	gz := gzip.NewWriter(&b)
+	if _, err := gz.Write(data); err != nil {
+		log.Fatal(err)
+	}
+	if err := gz.Close(); err != nil {
+		log.Fatal(err)
+	}
+	return b.Bytes()
 }
 
-func decompress(compressedData []byte) {
-	// Open the gzip file.
-	f, _ := os.Open("C:\\programs\\file.gz")
-
-	// Create new reader to decompress gzip.
-	reader, _ := gzip.NewReader(f)
-
-	// Empty byte slice.
-	result := make([]byte, 100)
-
-	// Read in data.
-	count, _ := reader.Read(result)
-
-	// Print our decompressed data.
-	fmt.Println(count)
-	fmt.Println(string(result))
-
+func decompress(compressedData []byte) []byte {
+	var b bytes.Buffer
+	gz, err := gzip.NewReader(&b)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if _, err := gz.Read(compressedData); err != nil {
+		log.Fatal(err)
+	}
+	if err := gz.Close(); err != nil {
+		log.Fatal(err)
+	}
+	return b.Bytes()
 }

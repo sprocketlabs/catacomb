@@ -1,7 +1,5 @@
 package catacomb
 
-import "fmt"
-
 type CloudStorageProvider int
 
 const (
@@ -22,13 +20,13 @@ const (
 
 type CatacombProvider struct {
 	accountId string
-	password string
-	provider string
+	password  string
+	provider  string
 }
 
 type CatacombStorageConfigs struct {
-	credentials string[]
-	providers CatacombProvider[]
+	credentials []string
+	providers   []CatacombProvider
 }
 
 type CatacombStorageSessions struct {
@@ -36,18 +34,19 @@ type CatacombStorageSessions struct {
 
 func init_storage(config CatacombStorageConfigs) *CatacombStorageSessions {
 
-	switch config.provider {
-	case "AWS_S3":
-		fmt.Printf("Unsupported")
-	case "AZURE_STORAGE":
-		fmt.Printf("Unsupported")
-	case "DO_VOLUMES":
-		fmt.Printf("Unsupported")
-	case "LINODE_STORAGE":
-		fmt.Printf("Unsupported")
-	default:
-		fmt.Printf("Unsupported")
-	}
+	/*
+		switch config.provider {
+		case "AWS_S3":
+			fmt.Printf("Unsupported")
+		case "AZURE_STORAGE":
+			fmt.Printf("Unsupported")
+		case "DO_VOLUMES":
+			fmt.Printf("Unsupported")
+		case "LINODE_STORAGE":
+			fmt.Printf("Unsupported")
+		default:
+			fmt.Printf("Unsupported")
+		}*/
 
 	return nil
 }

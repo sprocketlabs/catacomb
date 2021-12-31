@@ -1,14 +1,8 @@
 package catacomb
 
 import (
-	"fmt"
-	"io"
-	"log"
-	"os"
-
 	//"github.com/sprocketlabs/gocom"
 	"github.com/pkg/sftp"
-	"golang.org/x/crypto/ssh"
 )
 
 type SftpRemoteConfig struct {
@@ -20,6 +14,7 @@ type SftpRemoteSession struct {
 	session *sftp.Client
 }
 
+/*
 func sftpNewSession(config SftpRemoteConfig) SftpRemoteSession {
 	user := ""
 	pass := ""
@@ -138,3 +133,4 @@ func (session SftpRemoteSession) sftpDownloadObject() {
 		log.Fatal(err)
 	}
 }
+*/

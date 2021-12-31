@@ -1,31 +1,26 @@
 package catacomb
 
-import (
-	"fmt"
-	"os"
-	"github.com/aws/aws-sdk-go-v2"
-)
-
 type AwsS3Config struct {
 }
 
 type AwsS3Session struct {
-	session
+	//session
 }
 
-func (config AwsS3Config) awsNewSession() AwsS3Session {
+func (config AwsS3Config) awsNewSession() {
 
-	session := AwsS3Session{
-		session = session.Must(session.NewSession()),
-	}
+	//session := AwsS3Session{
+	//	session = session.Must(session.NewSession()),
+	//}
 
-	return session
+	return // session
 }
 
 func (session AwsS3Session) awsCloseSession() {
 
 }
 
+/*
 func awsStorageObjectUpload() {
 	sess := session.Must(session.NewSession())
 
@@ -75,4 +70,4 @@ func awsStorageObjectDownload() {
 
 func awsStorageObjectDelete() {
 
-}
+}*/
